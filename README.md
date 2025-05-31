@@ -16,7 +16,12 @@ A powerful Progressive Web App (PWA) designed to make your gym experience more e
 - **Warmup Calculator** 🔥
   - Generate optimal warmup sets
   - Customizable based on your target weight
-  - Progressive loading recommendations
+  - Weight Percentage Calculator
+
+- **Max Rep Calculator** 💪
+  - Enter the weight you lifted and number of repetitions to estimate your 1RM (1 Rep Max)
+  - Uses common formulas (Brzycki, Epley, etc.)
+  - Example: "I lifted 80kg for 5 reps, what's my estimated 1RM?"
 
 ## 🚀 Key Benefits
 
