@@ -1,38 +1,59 @@
-# sv
+# 💪 Alan's Gym Tools
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A powerful Progressive Web App (PWA) designed to make your gym experience more efficient and enjoyable. This lightweight, installable app provides essential tools that every fitness enthusiast needs right at their fingertips.
 
-## Creating a project
+## ✨ Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Unit Converter** 🔄
+  - Quick conversion between kilograms and pounds
+  - Instant calculations with no internet required
 
-```bash
-# create a new project in the current directory
-npx sv create
+- **Disk Calculator** 🏋️‍♂️
+  - Calculate total weight on your barbell
+  - Support for different plate sizes
+  - Easy to use interface for quick calculations
 
-# create a new project in my-app
-npx sv create my-app
-```
+- **Warmup Calculator** 🔥
+  - Generate optimal warmup sets
+  - Customizable based on your target weight
+  - Progressive loading recommendations
 
-## Developing
+## 🚀 Key Benefits
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- **Lightning Fast** ⚡
+  - Instant calculations
+  - No loading times
+  - Works offline
 
-```bash
-npm run dev
+- **User-Friendly** 🎯
+  - Clean, intuitive interface
+  - No unnecessary features
+  - Designed for quick access
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+- **Always Available** 📱
+  - Install as PWA on any device
+  - Works on iOS and Android
 
-## Building
+## 🛠️ Tech Stack
 
-To create a production version of your app:
+- **Frontend Framework**: SvelteKit
+- **Styling**: TailwindCSS
+- **Hosting**: Cloudflare Pages
+- **PWA Support**: Full offline capabilities
 
-```bash
-npm run build
-```
+## 🏁 Getting Started
 
-You can preview the production build with `npm run preview`.
+1. Visit the website
+2. Click "Install" in your browser
+3. Start using the tools!
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## 🤝 Contributing
+
+Feel free to open issues or submit pull requests if you have ideas for improvements!
+
+## 📝 License
+
+MIT License - feel free to use this project for your own purposes!
+
+---
+Made with ❤️ by Alan
