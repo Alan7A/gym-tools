@@ -3,7 +3,7 @@
   import { ArrowUpDown, BicepsFlexed, Dumbbell, Flame } from '@lucide/svelte';
 </script>
 
-<Tabs.Root>
+<Tabs.Root value="converter">
   <Tabs.List>
     <Tabs.Trigger value="converter">
       <ArrowUpDown class="h-4 w-4" />
