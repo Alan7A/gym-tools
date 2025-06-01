@@ -7,7 +7,7 @@
 <Card.Root>
   <Card.Header>
     <Card.Title class="flex items-center gap-2 text-lg">
-      <ArrowUpDown class="h-5 w-5 text-blue-400" />
+      <ArrowUpDown class="text-primary h-5 w-5" />
       Unit Converter
     </Card.Title>
     <Card.Description>Quick conversion between kilograms and pounds</Card.Description>

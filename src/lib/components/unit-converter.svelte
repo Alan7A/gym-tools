@@ -1,13 +1,14 @@
 <script lang="ts">
   import { Button } from '$lib/components/ui/button';
   import { Separator } from '$lib/components/ui/separator';
-  import { ArrowUpDown, Trash2 } from '@lucide/svelte';
+  import { Minus, Plus, Trash2 } from '@lucide/svelte';
   import QuickConvertionButton from './quick-convertion-button.svelte';
+  import AnimatedInput from './animated-input.svelte';
 
-  let kgValue = '';
-  let lbValue = '';
+  let kgValue: number | null = null;
+  let lbValue: number | null = null;
 
-  function updateValues(newKgValue: string, newLbValue: string) {
+  function updateValues(newKgValue: number | null, newLbValue: number | null) {
     kgValue = newKgValue;
     lbValue = newLbValue;
   }
@@ -16,10 +17,12 @@
     const input = event.target as HTMLInputElement;
     const value = input.value;
     if (value === '') {
-      updateValues('', '');
+      updateValues(null, null);
     } else {
       const numValue = parseFloat(value);
-      updateValues(value, (numValue * 2.20462).toFixed(2));
+      if (!isNaN(numValue)) {
+        updateValues(numValue, Number((numValue * 2.20462).toFixed(2)));
+      }
     }
   }
 
@@ -27,88 +30,55 @@
     const input = event.target as HTMLInputElement;
     const value = input.value;
     if (value === '') {
-      updateValues('', '');
+      updateValues(null, null);
     } else {
       const numValue = parseFloat(value);
-      updateValues((numValue * 0.453592).toFixed(2), value);
+      if (!isNaN(numValue)) {
+        updateValues(Number((numValue * 0.453592).toFixed(2)), numValue);
+      }
     }
   }
 
-  function incrementKg() {
-    const currentValue = kgValue === '' ? 0 : parseFloat(kgValue);
-    const newValue = (currentValue + 1).toString();
-    updateValues(newValue, (currentValue * 2.20462 + 2.20462).toFixed(2));
+  function updateKg(step: number) {
+    const currentValue = kgValue ?? 0;
+    const newValue = currentValue + step;
+    updateValues(newValue, Number((newValue * 2.20462).toFixed(2)));
   }
 
-  function decrementKg() {
-    const currentValue = kgValue === '' ? 0 : parseFloat(kgValue);
-    const newValue = currentValue - 1;
-    if (newValue >= 0) {
-      updateValues(newValue.toString(), (newValue * 2.20462).toFixed(2));
-    }
+  function updateLb(step: number) {
+    const currentValue = lbValue ?? 0;
+    const newValue = currentValue + step;
+    updateValues(Number((newValue * 0.453592).toFixed(2)), newValue);
   }
 
-  function incrementLb() {
-    const currentValue = lbValue === '' ? 0 : parseFloat(lbValue);
-    const newValue = (currentValue + 1).toString();
-    updateValues((currentValue * 0.453592 + 0.453592).toFixed(2), newValue);
-  }
-
-  function decrementLb() {
-    const currentValue = lbValue === '' ? 0 : parseFloat(lbValue);
-    const newValue = currentValue - 1;
-    if (newValue >= 0) {
-      updateValues((newValue * 0.453592).toFixed(2), newValue.toString());
-    }
-  }
-
-  function clearValues() {
-    updateValues('', '');
-  }
+  // function clearValues() {
+  //   updateValues(null, null);
+  // }
 
   function handleQuickConversion(lbs: number) {
-    updateValues((lbs * 0.453592).toFixed(2), lbs.toString());
-  }
-
-  function selectAll(event: Event) {
-    const input = event.target as HTMLInputElement;
-    input.select();
+    updateValues(Number((lbs * 0.453592).toFixed(2)), lbs);
   }
 </script>
 
-<div class="flex flex-col gap-8">
-  <div class="flex justify-around">
-    <div class="flex flex-col py-4">
+<div class="flex flex-col gap-6">
+  <div class="flex gap-6">
+    <!-- <div class="flex flex-col py-4">
       <button class="flex-1 text-4xl" on:click={incrementKg}>+</button>
       <button class="flex-1 text-4xl" on:click={decrementKg}>-</button>
-    </div>
-    <input
-      type="number"
-      placeholder="00"
-      class="w-32 border-none text-center text-6xl [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-      bind:value={kgValue}
-      on:input={handleKgChange}
-      on:focus={selectAll}
-    />
-    <p class="text-muted-foreground cursor-default self-end pb-4 text-4xl select-none">kg</p>
+    </div> -->
+    <AnimatedInput value={kgValue ?? 0} oninput={handleKgChange} />
+    <p class="text-muted-foreground min-w-10 cursor-default self-end text-4xl select-none">kg</p>
   </div>
 
-  <Button variant="ghost" onclick={clearValues} class="mx-auto"><Trash2 /></Button>
+  <!-- <Button variant="destructive" onclick={clearValues} class="mx-auto"><Trash2 /></Button> -->
 
-  <div class="flex justify-around">
-    <div class="flex flex-col py-4">
+  <div class="flex gap-6">
+    <!-- <div class="flex flex-col py-4">
       <button class="flex-1 text-4xl" on:click={incrementLb}>+</button>
       <button class="flex-1 text-4xl" on:click={decrementLb}>-</button>
-    </div>
-    <input
-      type="number"
-      placeholder="00"
-      class="w-32 border-none text-center text-6xl [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-      bind:value={lbValue}
-      on:input={handleLbChange}
-      on:focus={selectAll}
-    />
-    <p class="text-muted-foreground cursor-default self-end pb-4 text-4xl select-none">lb</p>
+    </div> -->
+    <AnimatedInput value={lbValue ?? 0} oninput={handleLbChange} />
+    <p class="text-muted-foreground min-w-10 cursor-default self-end text-4xl select-none">lb</p>
   </div>
 
   <Separator />
