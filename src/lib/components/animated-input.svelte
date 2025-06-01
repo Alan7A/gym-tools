@@ -84,7 +84,7 @@
       bind:this={input}
       class={clsx(
         showCaret ? 'caret-primary' : 'caret-transparent',
-        'spin-hide w-full bg-transparent py-2 !text-center font-[inherit] text-transparent outline-none [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+        'spin-hide bg-background w-full rounded-lg py-2 !text-center font-[inherit] text-transparent outline-none [-moz-appearance:textfield] focus:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
       )}
       style="font-kerning: none"
       type="number"
