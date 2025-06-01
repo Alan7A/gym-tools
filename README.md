@@ -5,15 +5,18 @@ A powerful Progressive Web App (PWA) designed to make your gym experience more e
 ## ✨ Features
 
 - **Unit Converter** 🔄
+
   - Quick conversion between kilograms and pounds
   - Instant calculations with no internet required
 
-- **Disk Calculator** 🏋️‍♂️
+- **Plates Calculator** 🏋️‍♂️
+
   - Calculate total weight on your barbell
   - Support for different plate sizes
   - Easy to use interface for quick calculations
 
 - **Warmup Calculator** 🔥
+
   - Generate optimal warmup sets
   - Customizable based on your target weight
   - Weight Percentage Calculator
@@ -26,11 +29,13 @@ A powerful Progressive Web App (PWA) designed to make your gym experience more e
 ## 🚀 Key Benefits
 
 - **Lightning Fast** ⚡
+
   - Instant calculations
   - No loading times
   - Works offline
 
 - **User-Friendly** 🎯
+
   - Clean, intuitive interface
   - No unnecessary features
   - Designed for quick access
@@ -61,4 +66,5 @@ Feel free to open issues or submit pull requests if you have ideas for improveme
 MIT License - feel free to use this project for your own purposes!
 
 ---
+
 Made with ❤️ by Alan
