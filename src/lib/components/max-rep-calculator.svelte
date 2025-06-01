@@ -2,46 +2,39 @@
   import { Input } from '$lib/components/ui/input/index.js';
   import { formatNumber, selectAll } from '$lib/utils';
   import autoAnimate from '@formkit/auto-animate';
+  import { maxRepCalculatorState } from '$lib/state/maxRepCalculatorState.svelte';
 
-  type OneRMResult = {
-    formula: string;
-    result: number;
-  };
+  const showResult = $derived(maxRepCalculatorState.weight > 0 && maxRepCalculatorState.reps > 0);
 
-  let weight = $state(0);
-  let reps = $state(0);
+  $effect(() => {
+    const weight = maxRepCalculatorState.weight;
+    const reps = maxRepCalculatorState.reps;
 
-  const showResult = $derived(weight > 0 && reps > 0);
+    if (weight > 0 && reps > 0) {
+      maxRepCalculatorState.formulas = [
+        {
+          formula: 'Brzycki',
+          result: weight * (36 / (37 - reps))
+        },
+        {
+          formula: 'Epley',
+          result: weight * (1 + reps / 30)
+        },
+        {
+          formula: 'McGlothin',
+          result: (100 * weight) / (101.3 - 2.67123 * reps)
+        },
+        {
+          formula: 'Lombardi',
+          result: weight * Math.pow(reps, 0.1)
+        }
+      ];
 
-  const formulas = $derived([
-    {
-      formula: 'Brzycki',
-      result: weight * (36 / (37 - reps))
-    },
-    {
-      formula: 'Epley',
-      result: weight * (1 + reps / 30)
-    },
-    {
-      formula: 'McGlothin',
-      result: (100 * weight) / (101.3 - 2.67123 * reps)
-    },
-    {
-      formula: 'Lombardi',
-      result: weight * Math.pow(reps, 0.1)
+      maxRepCalculatorState.averageResult =
+        maxRepCalculatorState.formulas.reduce((acc, curr) => acc + curr.result, 0) /
+        maxRepCalculatorState.formulas.length;
     }
-  ]);
-
-  const results = $derived(
-    formulas.map((formula) => ({
-      formula: formula.formula,
-      result: formula.result
-    }))
-  );
-
-  let averageResult = $derived(
-    results.reduce((acc, curr) => acc + curr.result, 0) / results.length
-  );
+  });
 </script>
 
 <div class="flex flex-col gap-6" use:autoAnimate>
@@ -51,7 +44,7 @@
       <Input
         type="number"
         placeholder="Weight lifted"
-        bind:value={weight}
+        bind:value={maxRepCalculatorState.weight}
         onfocus={selectAll}
         class="h-12 !text-xl"
       />
@@ -61,7 +54,7 @@
       <Input
         type="number"
         placeholder="Reps done"
-        bind:value={reps}
+        bind:value={maxRepCalculatorState.reps}
         onfocus={selectAll}
         class="h-12 !text-xl"
       />
@@ -74,14 +67,14 @@
     >
       <p class="text-primary font-semibold">Estimated 1RM:</p>
       <p class="text-2xl font-semibold text-white">
-        {formatNumber(averageResult)} kg
+        {formatNumber(maxRepCalculatorState.averageResult)} kg
       </p>
     </div>
 
     <div class="flex flex-col gap-2">
       <p>Formula results:</p>
-      {#each results as result}
-        <div class="bg-accent flex justify-between rounded-md p-3">
+      {#each maxRepCalculatorState.formulas as result}
+        <div class="bg-accent flex items-center justify-between rounded-md p-3">
           <p class="text-sm">{result.formula}</p>
           <p class="text-lg font-semibold">{formatNumber(result.result)} kg</p>
         </div>
@@ -91,9 +84,11 @@
     <div class="flex flex-col gap-2">
       <p>Training percentages:</p>
       {#each [95, 90, 85, 80, 75] as percentage}
-        <div class="bg-accent flex justify-between rounded-md p-3">
+        <div class="bg-accent flex items-center justify-between rounded-md p-3">
           <p class="text-sm">{percentage}%</p>
-          <p class="text-lg font-semibold">{formatNumber(averageResult * (percentage / 100))} kg</p>
+          <p class="text-lg font-semibold">
+            {formatNumber(maxRepCalculatorState.averageResult * (percentage / 100))} kg
+          </p>
         </div>
       {/each}
     </div>

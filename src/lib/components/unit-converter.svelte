@@ -4,13 +4,11 @@
   import { Minus, Plus, Trash2 } from '@lucide/svelte';
   import QuickConvertionButton from './quick-convertion-button.svelte';
   import AnimatedInput from './animated-input.svelte';
-
-  let kgValue: number | null = null;
-  let lbValue: number | null = null;
+  import { conversionState } from '$lib/state/conversionState.svelte';
 
   function updateValues(newKgValue: number | null, newLbValue: number | null) {
-    kgValue = newKgValue;
-    lbValue = newLbValue;
+    conversionState.kgValue = newKgValue;
+    conversionState.lbValue = newLbValue;
   }
 
   function handleKgChange(event: Event) {
@@ -40,20 +38,16 @@
   }
 
   function updateKg(step: number) {
-    const currentValue = kgValue ?? 0;
+    const currentValue = conversionState.kgValue ?? 0;
     const newValue = currentValue + step;
     updateValues(newValue, Number((newValue * 2.20462).toFixed(2)));
   }
 
   function updateLb(step: number) {
-    const currentValue = lbValue ?? 0;
+    const currentValue = conversionState.lbValue ?? 0;
     const newValue = currentValue + step;
     updateValues(Number((newValue * 0.453592).toFixed(2)), newValue);
   }
-
-  // function clearValues() {
-  //   updateValues(null, null);
-  // }
 
   function handleQuickConversion(lbs: number) {
     updateValues(Number((lbs * 0.453592).toFixed(2)), lbs);
@@ -62,22 +56,12 @@
 
 <div class="flex flex-col gap-6">
   <div class="flex gap-6">
-    <!-- <div class="flex flex-col py-4">
-      <button class="flex-1 text-4xl" on:click={incrementKg}>+</button>
-      <button class="flex-1 text-4xl" on:click={decrementKg}>-</button>
-    </div> -->
-    <AnimatedInput value={kgValue ?? 0} oninput={handleKgChange} />
+    <AnimatedInput value={conversionState.kgValue ?? 0} oninput={handleKgChange} />
     <p class="text-muted-foreground min-w-10 cursor-default self-end text-4xl select-none">kg</p>
   </div>
 
-  <!-- <Button variant="destructive" onclick={clearValues} class="mx-auto"><Trash2 /></Button> -->
-
   <div class="flex gap-6">
-    <!-- <div class="flex flex-col py-4">
-      <button class="flex-1 text-4xl" on:click={incrementLb}>+</button>
-      <button class="flex-1 text-4xl" on:click={decrementLb}>-</button>
-    </div> -->
-    <AnimatedInput value={lbValue ?? 0} oninput={handleLbChange} />
+    <AnimatedInput value={conversionState.lbValue ?? 0} oninput={handleLbChange} />
     <p class="text-muted-foreground min-w-10 cursor-default self-end text-4xl select-none">lb</p>
   </div>
 

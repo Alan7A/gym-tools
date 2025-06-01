@@ -2,24 +2,23 @@
   import { Input } from '$lib/components/ui/input/index.js';
   import { selectAll } from '$lib/utils';
   import autoAnimate from '@formkit/auto-animate';
+  import { plateCalculatorState } from '$lib/state/plateCalculatorState.svelte';
 
-  let barWeight = $state(20);
-  let targetWeight = $state(0);
-  let plateCounts = $state<Record<number, number>>({});
+  const plates = [20, 15, 10, 5, 1];
 
-  const plates = [20, 15, 10, 5, 2.5, 1];
-
-  const showResult = $derived(barWeight > 0 && targetWeight > 0);
+  const showResult = $derived(
+    plateCalculatorState.barWeight > 0 && plateCalculatorState.targetWeight > 0
+  );
 
   $effect(() => {
-    const target = targetWeight;
-    const bar = barWeight;
+    const target = plateCalculatorState.targetWeight;
+    const bar = plateCalculatorState.barWeight;
 
     if (isNaN(target) || isNaN(bar)) return;
 
     const weightToLoad = target - bar;
     if (weightToLoad <= 0) {
-      plateCounts = {};
+      plateCalculatorState.plateCounts = {};
       return;
     }
 
@@ -35,14 +34,17 @@
       }
     }
 
-    plateCounts = newPlateCounts;
+    plateCalculatorState.plateCounts = newPlateCounts;
   });
 
   const getTotalWeight = () => {
-    const bar = barWeight || 0;
-    const platesWeight = Object.entries(plateCounts).reduce((total, [weight, count]) => {
-      return total + Number(weight) * count * 2;
-    }, 0);
+    const bar = plateCalculatorState.barWeight || 0;
+    const platesWeight = Object.entries(plateCalculatorState.plateCounts).reduce(
+      (total, [weight, count]) => {
+        return total + Number(weight) * count * 2;
+      },
+      0
+    );
     return bar + platesWeight;
   };
 </script>
@@ -54,7 +56,7 @@
       <Input
         type="number"
         placeholder="Enter bar weight"
-        bind:value={barWeight}
+        bind:value={plateCalculatorState.barWeight}
         onfocus={selectAll}
         class="h-12 !text-xl"
       />
@@ -64,7 +66,7 @@
       <Input
         type="number"
         placeholder="Enter target weight"
-        bind:value={targetWeight}
+        bind:value={plateCalculatorState.targetWeight}
         onfocus={selectAll}
         class="h-12 !text-xl"
       />
@@ -75,10 +77,10 @@
     <div class="flex flex-col gap-2" use:autoAnimate>
       <p>Plates per side:</p>
       {#each plates as plate}
-        {#if plateCounts[plate] > 0}
+        {#if plateCalculatorState.plateCounts[plate] > 0}
           <div class="bg-muted flex justify-between rounded-md p-2">
             <p>{plate} kg plates</p>
-            <p>x{plateCounts[plate]}</p>
+            <p>x{plateCalculatorState.plateCounts[plate]}</p>
           </div>
         {/if}
       {/each}
