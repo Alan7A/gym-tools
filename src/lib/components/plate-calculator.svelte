@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button } from '$lib/components/ui/button/index.js';
   import { Input } from '$lib/components/ui/input/index.js';
-  import { formatNumber, selectAll } from '$lib/utils';
+  import { selectAll } from '$lib/utils';
+  import autoAnimate from '@formkit/auto-animate';
 
   let barWeight = $state(20);
   let targetWeight = $state(0);
@@ -47,7 +47,7 @@
   };
 </script>
 
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6" use:autoAnimate>
   <div class="flex gap-4">
     <div class="flex flex-col gap-2">
       <p>Bar weight (kg)</p>
@@ -72,7 +72,7 @@
   </div>
 
   {#if showResult}
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2" use:autoAnimate>
       <p>Plates per side:</p>
       {#each plates as plate}
         {#if plateCounts[plate] > 0}

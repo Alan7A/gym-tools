@@ -11,7 +11,7 @@
   <link rel="manifest" href="/manifest.json" />
 </svelte:head>
 
-<main class="container mx-auto flex min-h-screen max-w-sm flex-col gap-4 py-4">
+<main class="container mx-auto flex min-h-screen max-w-sm flex-col gap-4 pt-6 pb-4">
   <Header />
   <Nav />
   <ModeWatcher defaultMode="dark" />

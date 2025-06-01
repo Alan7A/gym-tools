@@ -5,7 +5,7 @@
 </script>
 
 <Tabs.Root value={page.url.pathname.split('/')[1]}>
-  <Tabs.List class="w-full">
+  <Tabs.List class="h-10 w-full">
     <Tabs.Trigger value="" class="p-0">
       <a href="/" class="flex h-full w-full items-center justify-center gap-1 p-1">
         <ArrowUpDown class="h-4 w-4" />

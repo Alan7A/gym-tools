@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Input } from '$lib/components/ui/input/index.js';
   import { formatNumber, selectAll } from '$lib/utils';
+  import autoAnimate from '@formkit/auto-animate';
 
   type OneRMResult = {
     formula: string;
@@ -43,7 +44,7 @@
   );
 </script>
 
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6" use:autoAnimate>
   <div class="flex gap-4">
     <div class="flex flex-col gap-2">
       <p>Weight (kg)</p>

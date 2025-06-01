@@ -45,6 +45,7 @@
 		"vite-plugin-pwa": "^1.0.0"
 	},
 	"dependencies": {
+		"@formkit/auto-animate": "^0.8.2",
 		"@number-flow/svelte": "^0.3.7",
 		"mode-watcher": "0.5.1"
 	}

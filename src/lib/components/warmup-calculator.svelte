@@ -3,11 +3,12 @@
   import * as Card from '$lib/components/ui/card/index.js';
   import WarmupSet from '$lib/components/warmup-set.svelte';
   import { selectAll } from '$lib/utils';
+  import autoAnimate from '@formkit/auto-animate';
 
   let targetWeight = $state(0);
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-4" use:autoAnimate>
   <div class="flex flex-col gap-2">
     <p>Target weight (kg)</p>
     <Input
