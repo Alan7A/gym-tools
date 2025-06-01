@@ -3,6 +3,7 @@
   import { formatNumber, selectAll } from '$lib/utils';
   import autoAnimate from '@formkit/auto-animate';
   import { maxRepCalculatorState } from '$lib/state/maxRepCalculatorState.svelte';
+  import WeightToggle from './weight-toggle.svelte';
 
   const showResult = $derived(maxRepCalculatorState.weight > 0 && maxRepCalculatorState.reps > 0);
 
@@ -66,9 +67,10 @@
       class="bg-primary/20 border-primary/50 flex items-center justify-between rounded-lg border px-3 py-5"
     >
       <p class="text-primary font-semibold">Estimated 1RM:</p>
-      <p class="text-2xl font-semibold text-white">
-        {formatNumber(maxRepCalculatorState.averageResult)} kg
-      </p>
+      <WeightToggle
+        kgWeight={maxRepCalculatorState.averageResult}
+        class="text-2xl font-semibold text-white"
+      />
     </div>
 
     <div class="flex flex-col gap-2">
@@ -76,7 +78,7 @@
       {#each maxRepCalculatorState.formulas as result}
         <div class="bg-accent flex items-center justify-between rounded-md p-3">
           <p class="text-sm">{result.formula}</p>
-          <p class="text-lg font-semibold">{formatNumber(result.result)} kg</p>
+          <WeightToggle kgWeight={result.result} class="text-lg font-semibold" />
         </div>
       {/each}
     </div>
@@ -86,9 +88,10 @@
       {#each [95, 90, 85, 80, 75] as percentage}
         <div class="bg-accent flex items-center justify-between rounded-md p-3">
           <p class="text-sm">{percentage}%</p>
-          <p class="text-lg font-semibold">
-            {formatNumber(maxRepCalculatorState.averageResult * (percentage / 100))} kg
-          </p>
+          <WeightToggle
+            kgWeight={maxRepCalculatorState.averageResult * (percentage / 100)}
+            class="text-lg font-semibold"
+          />
         </div>
       {/each}
     </div>

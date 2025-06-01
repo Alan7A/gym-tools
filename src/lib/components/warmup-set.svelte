@@ -1,5 +1,6 @@
 <script lang="ts">
   import { formatNumber } from '$lib/utils';
+  import WeightToggle from './weight-toggle.svelte';
 
   type Props = {
     setNumber: number;
@@ -19,7 +20,7 @@
     <p class="text-muted-foreground text-lg">{percentage}%</p>
   </div>
   <div class="flex flex-col items-end gap-1">
-    <p class="text-primary text-lg font-semibold">{formatNumber(weight)} kg</p>
+    <WeightToggle kgWeight={weight} class="text-primary text-lg font-semibold" />
     <p class="text-muted-foreground text-sm">{reps} reps</p>
   </div>
 </div>

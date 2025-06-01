@@ -3,6 +3,7 @@
   import { selectAll } from '$lib/utils';
   import autoAnimate from '@formkit/auto-animate';
   import { plateCalculatorState } from '$lib/state/plateCalculatorState.svelte';
+  import WeightToggle from './weight-toggle.svelte';
 
   const plates = [20, 15, 10, 5, 1];
 
@@ -79,7 +80,7 @@
       {#each plates as plate}
         {#if plateCalculatorState.plateCounts[plate] > 0}
           <div class="bg-muted flex justify-between rounded-md p-2">
-            <p>{plate} kg plates</p>
+            <p><WeightToggle kgWeight={plate} /> plates</p>
             <p>x{plateCalculatorState.plateCounts[plate]}</p>
           </div>
         {/if}
@@ -90,7 +91,7 @@
       class="bg-primary/20 border-primary/50 flex items-center justify-between rounded-lg border px-3 py-4"
     >
       <p>Total weight:</p>
-      <p class="text-primary text-xl font-semibold">{getTotalWeight()} kg</p>
+      <WeightToggle kgWeight={getTotalWeight()} class="text-primary text-xl font-semibold" />
     </div>
   {/if}
 </div>
