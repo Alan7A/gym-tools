@@ -69,7 +69,7 @@
       <p class="text-primary font-semibold">Estimated 1RM:</p>
       <WeightToggle
         kgWeight={maxRepCalculatorState.averageResult}
-        class="text-2xl font-semibold text-white"
+        class="text-foreground text-2xl font-semibold"
       />
     </div>
 
