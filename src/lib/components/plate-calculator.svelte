@@ -4,6 +4,8 @@
   import autoAnimate from '@formkit/auto-animate';
   import { plateCalculatorState } from '$lib/state/plateCalculatorState.svelte';
   import WeightToggle from './weight-toggle.svelte';
+  import { warmupCalculatorState } from '$lib/state/warmupCalculatorState.svelte';
+  import { goto } from '$app/navigation';
 
   const plates = [20, 15, 10, 5, 1];
 
@@ -48,6 +50,11 @@
     );
     return bar + platesWeight;
   };
+
+  function goToWarmupCalculator() {
+    warmupCalculatorState.targetWeight = getTotalWeight();
+    goto('/warmup');
+  }
 </script>
 
 <div class="flex flex-col gap-6" use:autoAnimate>
@@ -90,7 +97,11 @@
     <div
       class="bg-primary/20 border-primary/50 flex items-center justify-between rounded-lg border px-3 py-4"
     >
-      <p>Total weight:</p>
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <div class="flex cursor-pointer items-center gap-4" onclick={goToWarmupCalculator}>
+        <p>Total weight:</p>
+      </div>
       <WeightToggle kgWeight={getTotalWeight()} class="text-primary text-xl font-semibold" />
     </div>
   {/if}

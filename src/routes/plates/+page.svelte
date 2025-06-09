@@ -2,6 +2,7 @@
   import { Dumbbell } from '@lucide/svelte';
   import * as Card from '$lib/components/ui/card/index.js';
   import PlateCalculator from '$lib/components/plate-calculator.svelte';
+  import TooltipIcon from '$lib/components/ui/tooltip-icon.svelte';
 </script>
 
 <Card.Root>
@@ -10,7 +11,10 @@
       <Dumbbell class="text-primary h-5 w-5" />
       Plate calculator
     </Card.Title>
-    <Card.Description>Calculate total weight on your barbell</Card.Description>
+    <Card.Description class="flex items-center gap-1">
+      Calculate total weight on your barbell
+      <TooltipIcon title="Click on 'Total weight:' label to calculate warmup sets" />
+    </Card.Description>
   </Card.Header>
   <Card.Content>
     <PlateCalculator />
