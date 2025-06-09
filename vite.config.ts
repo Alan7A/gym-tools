@@ -13,7 +13,11 @@ export default defineConfig({
         enabled: true
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest,json,wasm}']
+        globPatterns: [
+          '**/*.{js,css,html}',
+          '**/*.{woff2,woff,ttf,otf}',
+          '**/*.{json,webmanifest,ico,png,svg}'
+        ]
       },
       manifest: {
         name: 'Gym Tools',
