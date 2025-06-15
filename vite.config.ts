@@ -25,8 +25,8 @@ export default defineConfig({
         description: 'Essential tools for your gym sessions',
         start_url: '/',
         display: 'standalone',
-        theme_color: '#08090B',
-        background_color: '#08090B',
+        theme_color: '#0f0f1a',
+        background_color: '#0f0f1a',
         icons: [
           {
             src: '/pwa-192x192.png',

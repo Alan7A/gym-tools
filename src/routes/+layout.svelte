@@ -9,7 +9,7 @@
 
 <svelte:head>
   <link rel="manifest" href="/manifest.webmanifest" />
-  <meta name="theme-color" content="#08090B" />
+  <meta name="theme-color" content="#0f0f1a" />
 </svelte:head>
 
 <main class="container mx-auto flex min-h-screen max-w-sm flex-col gap-4 pt-6 pb-4">
